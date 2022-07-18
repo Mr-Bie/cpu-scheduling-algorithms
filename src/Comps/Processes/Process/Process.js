@@ -10,7 +10,7 @@ const Process = ({
   seconds,
   nextProcess,
   id,
-  processTime,
+  burstTime,
   processRemainingTime,
   arriveTime,
   finished,

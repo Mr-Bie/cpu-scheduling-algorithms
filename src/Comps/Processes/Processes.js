@@ -77,7 +77,7 @@ function Processes({
         <tbody key={-1}>
           <tr>
             <th>Index</th>
-            <th>Process Time</th>
+            <th>Burst Time</th>
             <th>Arrive Time</th>
             <th>Remaining Time</th>
             <th>Finished Time</th>
@@ -90,14 +90,12 @@ function Processes({
           <tbody key={i}>
             <tr>
               <th>{i}</th>
-              <th>{v.processTime}</th>
+              <th>{v.burstTime}</th>
               <th>{v.arriveTime}</th>
               <th>{v.remainingTime}</th>
               <th>{v.finished ? v.finishedTime : "?"}</th>
               <th>
-                {v.finished
-                  ? v.finishedTime - v.arriveTime - v.processTime
-                  : "?"}
+                {v.finished ? v.finishedTime - v.arriveTime - v.burstTime : "?"}
               </th>
               <th>{v.finished ? v.finishedTime - v.arriveTime : "?"}</th>
               <th>{v.priority}</th>
@@ -113,7 +111,7 @@ function Processes({
             <Process
               seconds={seconds}
               id={v.id}
-              processTime={v.processTime}
+              burstTime={v.burstTime}
               processRemainingTime={v.remainingTime}
               arriveTime={v.arriveTime}
               finished={v.finished}

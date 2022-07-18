@@ -2,12 +2,11 @@ export default (algo, processes, seconds, quantum) => {
   const unFinishedArrivedProcesses = processes.filter(
     (v) => !v.finished && seconds >= v.arriveTime
   );
-  console.log(unFinishedArrivedProcesses);
   let processesToExecute = [];
   switch (algo) {
     case "SJF": {
       unFinishedArrivedProcesses
-        .sort((a, b) => a.processTime - b.processTime)
+        .sort((a, b) => a.burstTime - b.burstTime)
         .forEach((v) => {
           for (let i = 0; i < v.remainingTime; i++) processesToExecute.push(v);
         });
@@ -31,21 +30,15 @@ export default (algo, processes, seconds, quantum) => {
     }
     case "RR": {
       processesToExecute = unFinishedArrivedProcesses
-        .filter((v) => (v.processTime - v.remainingTime) % quantum)
+        .filter((v) => (v.burstTime - v.remainingTime) % quantum)
         .sort((a, b) => a.remainingTime - b.remainingTime);
-      console.log(processesToExecute);
       if (!processesToExecute.length)
         processesToExecute = unFinishedArrivedProcesses.sort((a, b) => {
-          if (
-            a.processTime - a.remainingTime ===
-            b.processTime - b.remainingTime
-          ) {
+          if (a.burstTime - a.remainingTime === b.burstTime - b.remainingTime) {
             return a.remainingTime - b.remainingTime;
           } else {
             return (
-              a.processTime -
-              a.remainingTime -
-              (b.processTime - b.remainingTime)
+              a.burstTime - a.remainingTime - (b.burstTime - b.remainingTime)
             );
           }
         });
@@ -59,6 +52,5 @@ export default (algo, processes, seconds, quantum) => {
         });
     }
   }
-  console.log(processesToExecute);
   return processesToExecute;
 };
