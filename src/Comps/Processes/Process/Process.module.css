@@ -1,0 +1,10 @@
+.container {
+    height: 50px;
+    background-color: red;
+    border-radius: 3px;
+    margin: 10px;
+    transition:width 1s cubic-bezier(.45,.05,.55,.95);
+
+}
+
+
