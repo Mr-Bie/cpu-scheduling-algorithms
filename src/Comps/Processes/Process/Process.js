@@ -1,9 +1,6 @@
 // Dependencies
 import { useEffect, useState } from "react";
 
-// Assets
-import styles from "./Process.module.css";
-
 const Process = ({
   tick,
   running,
@@ -26,14 +23,16 @@ const Process = ({
   }, [tick]);
 
   return (
-    <div
-      className={styles["container"]}
+    <div className="flex flex-row gap-2 max-w-fit">
+      <p className="text-white text-sm ">{id}</p>
+      <div
+      className={`${finished ? "bg-darkBlue text-white" : "bg-white text-darkBlue"} rounded-md flex justify-center transition-all duration-1000`}
       style={{
         width: `${processRemainingTime * 50}px`,
-        backgroundColor: finished ? "white" : "red",
       }}
     >
-      {finished ? "Finished!" : `${processRemainingTime} s`}
+    </div>
+    <p className="text-white">{finished ? "Finished!" : `${processRemainingTime} s`}</p>
     </div>
   );
 };

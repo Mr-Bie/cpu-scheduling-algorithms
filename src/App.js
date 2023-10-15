@@ -21,33 +21,39 @@ function App() {
 
   const chooseAlgo = (event) => setAlgo(event.target.value.toString());
 
+  const changeAlgo = () => window.location.reload(false);
+
+  const restart = () => changeAlgo();
+
   return (
-    <div className="App">
+    <div className="flex w-screen h-screen">
       {!algo ? (
-        <div>
-          <button onClick={chooseAlgo} value={"FCFS"}>
+        <div className="flex flex-col justify-center items-center gap-4 w-full h-screen">
+          <button className="text-white border-solid border-white border-2 py-1 px-8 rounded-md w-40 hover:text-darkBlue hover:bg-white hover:scale-110 transition-all duration-100" onClick={chooseAlgo} value={"FCFS"}>
             FCFS
           </button>
-          <button onClick={chooseAlgo} value={"SJF"}>
+          <button className="text-white border-solid border-white border-2 py-1 px-8 rounded-md w-40 hover:text-darkBlue hover:bg-white hover:scale-110 transition-all duration-100" onClick={chooseAlgo} value={"SJF"}>
             SJF
           </button>
-          <button onClick={chooseAlgo} value={"SRT"}>
+          <button className="text-white border-solid border-white border-2 py-1 px-8 rounded-md w-40 hover:text-darkBlue hover:bg-white hover:scale-110 transition-all duration-100" onClick={chooseAlgo} value={"SRT"}>
             SRT
           </button>
-          <button onClick={chooseAlgo} value={"PR"}>
+          <button className="text-white border-solid border-white border-2 py-1 px-8 rounded-md w-40 hover:text-darkBlue hover:bg-white hover:scale-110 transition-all duration-100" onClick={chooseAlgo} value={"PR"}>
             Priority
           </button>
-          <button onClick={chooseAlgo} value={"RR"}>
+          <button className="text-white border-solid border-white border-2 py-1 px-8 rounded-md w-40 hover:text-darkBlue hover:bg-white hover:scale-110 transition-all duration-100" onClick={chooseAlgo} value={"RR"}>
             Round Robin
           </button>
         </div>
       ) : (
-        <>
+        <div className="flex flex-col justify-center items-center w-full p-4">
           <Timer
             start={start}
             stop={pause}
             seconds={seconds}
             running={running}
+            finished={finished}
+            restart={restart}
           />
           <Processes
             algo={algo}
@@ -58,8 +64,9 @@ function App() {
             stopRunning={stopRunning}
             setFinished={setFinished}
             setSeconds={setSeconds}
+            changeAlgo={changeAlgo}
           />
-        </>
+        </div>
       )}
     </div>
   );
